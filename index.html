@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CADAN Comunicação Visual — Estruturas que marcam presença</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14171B;
+    --bg-alt:#1A1E23;
+    --surface:#20252B;
+    --surface-2:#252B32;
+    --ink:#F3F4EF;
+    --ink-dim:#9BA3AC;
+    --ink-faint:#5C636B;
+    --orange:#CF2B1D;
+    --orange-dim:#A82215;
+    --blue:#E63A2B;
+    --line:#31373E;
+    --line-soft:#262B31;
+    --radius:6px;
+    --wrap:1240px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .display{font-family:'Big Shoulders Display',sans-serif;text-transform:uppercase;}
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
+  ::selection{background:var(--orange);color:#14171B;}
+
+  /* background blueprint grid */
+  .grid-bg{
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:48px 48px;
+  }
+
+  /* eyebrow / catalog label */
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--orange);margin-bottom:12px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--orange);}
+
+  /* corner register marks — signature element */
+  .reg{position:relative;}
+  .reg::before,.reg::after,.reg .rc1,.reg .rc2{
+    content:'';position:absolute;width:14px;height:14px;
+    border:1.5px solid var(--ink-faint);
+    opacity:.55;pointer-events:none;transition:border-color .25s, opacity .25s;
+  }
+  .reg::before{top:-1px;left:-1px;border-right:none;border-bottom:none;}
+  .reg::after{bottom:-1px;right:-1px;border-left:none;border-top:none;}
+  .reg .rc1{top:-1px;right:-1px;border-left:none;border-bottom:none;}
+  .reg .rc2{bottom:-1px;left:-1px;border-right:none;border-top:none;}
+  .reg:hover::before,.reg:hover::after,.reg:hover .rc1,.reg:hover .rc2{
+    border-color:var(--orange);opacity:1;
+  }
+
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:14px 26px;border-radius:var(--radius);
+    font-weight:600;font-size:14.5px;letter-spacing:.01em;
+    border:1px solid transparent;transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    white-space:nowrap;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn--primary{background:var(--orange);color:#0D0D0D;}
+  .btn--primary:hover{background:#ff6c39;}
+  .btn--ghost{border-color:var(--line);color:var(--ink);}
+  .btn--ghost:hover{border-color:var(--ink-dim);}
+  .btn--wpp{background:#1FAF57;color:#fff;}
+  .btn--wpp:hover{background:#22c463;}
+
+  /* ---------------- HEADER ---------------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(20,23,27,.82);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .logo{display:flex;align-items:center;gap:9px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:26px;letter-spacing:.02em;text-transform:uppercase;}
+  .logo span{color:var(--orange);}
+  .logo .dot{width:9px;height:9px;background:var(--orange);display:inline-block;border-radius:1px;}
+  .logo-mark{height:34px;width:auto;}
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a{
+    font-size:14px;color:var(--ink-dim);font-weight:500;position:relative;padding:4px 0;
+    transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--orange);transition:width .2s;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{display:flex;align-items:center;gap:16px;}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;}
+  .burger span{width:22px;height:2px;background:var(--ink);}
+
+  /* ---------------- HERO ---------------- */
+  .hero{
+    padding:140px 0 76px;position:relative;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% 20%, rgba(207,43,29,.12), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 8% 90%, rgba(207,43,29,.08), transparent 60%),
+      var(--bg);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;}
+  .hero h1{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;
+    font-size:clamp(40px,5.4vw,68px);line-height:.98;letter-spacing:.005em;
+    text-transform:uppercase;
+  }
+  .hero h1 .accent{color:var(--orange);}
+  .hero p.lede{
+    margin-top:24px;font-size:17px;line-height:1.6;color:var(--ink-dim);max-width:480px;
+  }
+  .hero-actions{display:flex;gap:14px;margin-top:26px;flex-wrap:wrap;}
+  .hero-stats{display:flex;gap:36px;margin-top:36px;padding-top:20px;border-top:1px solid var(--line-soft);}
+  .hero-stats div b{display:block;font-family:'Big Shoulders Display',sans-serif;font-size:30px;font-weight:800;color:var(--ink);}
+  .hero-stats div span{font-size:12.5px;color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;}
+
+  .hero-art{position:relative;}
+  .hero-art-frame{
+    border:1px solid var(--line);background:var(--bg-alt);border-radius:var(--radius);
+    padding:26px 18px 18px;position:relative;
+  }
+  .hero-art-frame .tag{
+    position:absolute;top:-11px;left:18px;background:var(--bg);padding:0 8px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--ink-faint);
+  }
+
+  /* ---------------- SECTION SHELL ---------------- */
+  section{padding:84px 0;border-top:1px solid var(--line-soft);}
+  .head-row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:38px;flex-wrap:wrap;}
+  .head-row h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;text-transform:uppercase;
+    font-size:clamp(30px,3.6vw,44px);line-height:1;max-width:640px;
+  }
+  .head-row p{color:var(--ink-dim);max-width:380px;font-size:15px;line-height:1.6;}
+
+  /* ---------------- SERVICES ---------------- */
+  .services{background:var(--bg-alt);}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);}
+  .svc-card{
+    background:var(--bg-alt);padding:34px 30px 30px;position:relative;
+    transition:background .25s;
+  }
+  .svc-card:hover{background:var(--surface);}
+  .svc-num{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);letter-spacing:.06em;margin-bottom:22px;display:block;}
+  .svc-icon{width:40px;height:40px;color:var(--orange);margin-bottom:20px;}
+  .svc-card h3{font-family:'Big Shoulders Display',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;margin-bottom:10px;letter-spacing:.01em;}
+  .svc-card p{color:var(--ink-dim);font-size:14px;line-height:1.65;margin-bottom:18px;}
+  .svc-specs{display:flex;flex-wrap:wrap;gap:6px;}
+  .svc-specs span{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--ink-faint);
+    border:1px solid var(--line);padding:3px 8px;border-radius:3px;letter-spacing:.02em;
+  }
+
+  /* ---------------- PORTFOLIO ---------------- */
+  .folio-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:130px;gap:10px;
+  }
+  .folio-item{
+    position:relative;overflow:hidden;border-radius:var(--radius);cursor:pointer;
+    border:1px solid var(--line-soft);
+  }
+  .folio-item.s-a{grid-column:span 2;grid-row:span 3;}
+  .folio-item.s-b{grid-column:span 2;grid-row:span 2;}
+  .folio-item.s-c{grid-column:span 1;grid-row:span 3;}
+  .folio-item.s-d{grid-column:span 1;grid-row:span 3;}
+  .folio-item.s-e{grid-column:span 2;grid-row:span 2;}
+  .folio-item.s-f{grid-column:span 2;grid-row:span 2;}
+  .folio-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s ease, filter .3s ease, opacity .6s ease;}
+  .folio-item:hover img{transform:scale(1.04);}
+  .folio-overlay .p-name,.folio-overlay .p-spec{transition:opacity .3s ease;}
+  .folio-overlay{
+    position:absolute;inset:0;background:linear-gradient(180deg, transparent 40%, rgba(15,17,19,.92) 100%);
+    display:flex;flex-direction:column;justify-content:flex-end;padding:16px;
+    opacity:0;transform:translateY(8px);transition:opacity .3s ease, transform .3s ease;
+  }
+  .folio-item:hover .folio-overlay{opacity:1;transform:translateY(0);}
+  .folio-overlay .p-name{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.01em;}
+  .folio-overlay .p-spec{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);margin-top:4px;letter-spacing:.03em;}
+  .folio-more{text-align:center;margin-top:30px;}
+
+  /* ---------------- INSTAGRAM ---------------- */
+  .insta{position:relative;background:var(--bg-alt);}
+  .insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;}
+  .insta-item{aspect-ratio:1/1;border-radius:var(--radius);position:relative;overflow:hidden;border:1px solid var(--line-soft);}
+  .insta-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .insta-item::after{
+    content:'';position:absolute;inset:0;background:rgba(20,23,27,0);transition:background .25s;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .insta-item:hover::after{background:rgba(20,23,27,.35);}
+  .insta-cta{display:flex;justify-content:center;margin-top:30px;}
+  .insta-cta a{gap:10px;}
+
+  /* ---------------- CLIENTS MARQUEE ---------------- */
+  .clients{padding:64px 0;}
+  .marquee{overflow:hidden;position:relative;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:36px 0;}
+  .marquee::before,.marquee::after{
+    content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;
+  }
+  .marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent);}
+  .marquee::after{right:0;background:linear-gradient(270deg,var(--bg),transparent);}
+  .marquee-track{display:flex;gap:64px;width:max-content;animation:scroll 28s linear infinite;}
+  @keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .client-chip{
+    display:flex;align-items:center;gap:10px;
+    font-family:'Big Shoulders Display',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;
+    color:var(--ink-faint);letter-spacing:.03em;opacity:.75;transition:color .2s,opacity .2s;
+  }
+  .client-chip:hover{color:var(--ink);opacity:1;}
+  .client-chip i{width:6px;height:6px;background:var(--ink-faint);border-radius:50%;display:inline-block;}
+
+  /* ---------------- CTA STRIP ---------------- */
+  .cta-strip{
+    background:linear-gradient(120deg, var(--surface), var(--bg-alt));
+    text-align:center;padding:68px 24px;
+  }
+  .cta-strip h2{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(30px,4.4vw,52px);font-weight:800;text-transform:uppercase;max-width:760px;margin:0 auto 14px;line-height:1.02;}
+  .cta-strip p{color:var(--ink-dim);max-width:520px;margin:0 auto 34px;font-size:15.5px;}
+
+  /* ---------------- FOOTER ---------------- */
+  footer{background:var(--bg-alt);border-top:1px solid var(--line-soft);padding:52px 0 24px;}
+  .foot-grid{display:grid;grid-template-columns:1.3fr .8fr .8fr .9fr;gap:28px;padding-bottom:34px;border-bottom:1px solid var(--line-soft);}
+  .foot-logo-img{height:54px;width:auto;margin-bottom:18px;}
+  .foot-grid p{color:var(--ink-faint);font-size:13.5px;line-height:1.7;max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:16px;}
+  .foot-col a,.foot-col li{display:block;color:var(--ink-faint);font-size:14px;margin-bottom:11px;transition:color .2s;}
+  .foot-col a:hover{color:var(--orange);}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;flex-wrap:wrap;gap:12px;}
+  .foot-bottom p{color:var(--ink-faint);font-size:12.5px;font-family:'IBM Plex Mono',monospace;}
+  .foot-social{display:flex;gap:14px;}
+  .foot-social a{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink-dim);transition:all .2s;}
+  .foot-social a:hover{border-color:var(--orange);color:var(--orange);}
+
+  /* ---------------- WHATSAPP FLOAT ---------------- */
+  .wpp-float{
+    position:fixed;bottom:26px;right:26px;z-index:200;
+    width:58px;height:58px;border-radius:50%;background:#1FAF57;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  .wpp-float:hover{background:#22c463;}
+  @keyframes pulse{0%,100%{box-shadow:0 8px 24px rgba(31,175,87,.25);}50%{box-shadow:0 8px 24px rgba(31,175,87,.55);}}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .marquee-track{animation:none;}
+    .wpp-float{animation:none;}
+  }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .burger{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero{padding-top:112px;}
+    .svc-grid{grid-template-columns:repeat(2,1fr);}
+    .folio-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
+    .folio-item.s-a,.folio-item.s-e,.folio-item.s-f{grid-column:span 2;grid-row:span 2;}
+    .folio-item.s-c,.folio-item.s-d{grid-column:span 1;grid-row:span 2;}
+    .insta-grid{grid-template-columns:repeat(3,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 18px;}
+    .svc-grid{grid-template-columns:1fr;}
+    .folio-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+    .hero-stats{gap:22px;flex-wrap:wrap;}
+    .insta-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr;gap:30px;}
+    .foot-bottom{flex-direction:column;align-items:flex-start;}
+    .wpp-float{width:52px;height:52px;bottom:18px;right:18px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo"><img src="cadan-hexmark.png" alt="cadan" class="logo-mark">Cadan Comunicaçao Visual</span></a>
+    <nav class="nav-links">
+      <a href="#top">Início</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#portfolio">Portfólio</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <div class="nav-cta">
+      <!-- EDITAR: troque o número (formato 55 + DDD + número, sem espaços/traços) -->
+      <a class="btn btn--primary" href="https://wa.link/sqr8dh" target="_blank" rel="noopener">
+        Orçamento via WhatsApp
+      </a>
+      <button class="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="hero grid-bg" style="border-top:none;padding-top:140px;">
+  <div class="wrap hero-grid">
+    <div>
+      <!-- EDITAR: título e subtítulo principal da página -->
+      <div class="eyebrow">CADAN // Comunicação Visual</div>
+      <h1>Transformando projetos em <span class="accent">estruturas reais</span> e impactantes</h1>
+      <p class="lede">Especialistas em comunicação visual — de fachadas em relevo à sinalização de grandes formatos, com precisão estrutural do projeto à instalação.</p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn btn--primary">Ver Nossos Projetos</a>
+        <a href="#contato" class="btn btn--ghost">Fale com a Equipe</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>500+</b><span>Projetos entregues</span></div>
+        <div><b>14</b><span>Anos de fabricação</span></div>
+        <div><b>±2mm</b><span>Precisão estrutural</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art">
+      <div class="hero-art-frame reg">
+        <span class="rc1"></span><span class="rc2"></span>
+        <div class="tag mono">FICHA TÉCNICA / PROJETO EM DESTAQUE</div>
+        <!-- EDITAR FOTO: troque o arquivo fotos/hero.jpg pela foto do seu projeto de maior impacto -->
+        <img src="fotos/hero.jpg" alt="Projeto CADAN em destaque" width="480" height="420" style="width:100%;height:420px;object-fit:cover;border-radius:3px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVIÇOS ============ -->
+<section id="servicos" class="services">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <div class="eyebrow">Catálogo de Serviços</div>
+        <h2>Do projeto técnico à instalação em campo</h2>
+      </div>
+      <p>Cinco frentes de trabalho, um único padrão de precisão — do desenho estrutural ao acabamento final.</p>
+    </div>
+  </div>
+
+  <!-- EDITAR: os 5 cards de serviço abaixo (título, texto e tags) -->
+  <div class="wrap" style="padding:0;">
+  <div class="svc-grid">
+
+    <div class="svc-card reg">
+      <span class="rc1"></span><span class="rc2"></span>
+      <span class="svc-num mono">SERV.01</span>
+      <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+        <rect x="7" y="14" width="26" height="18" rx="1"/>
+        <path d="M12 14v-3a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3"/>
+        <path d="M13 22h14M13 26h9"/>
+      </svg>
+      <h3>Fachadas & Letras em Relevo</h3>
+      <p>Letras caixa, acrílico espelhado e acabamentos 3D com iluminação embutida para fachadas de alto impacto.</p>
+      <div class="svc-specs">
+        <span>ACM</span><span>ACRÍLICO</span><span>LED</span>
+      </div>
+    </div>
+
+    <div class="svc-card reg">
+      <span class="rc1"></span><span class="rc2"></span>
+      <span class="svc-num mono">SERV.02</span>
+      <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+        <path d="M5 24l3-9a3 3 0 0 1 3-2h18a3 3 0 0 1 3 2l3 9"/>
+        <rect x="4" y="24" width="32" height="7" rx="1.5"/>
+        <circle cx="11" cy="31" r="2.4"/><circle cx="29" cy="31" r="2.4"/>
+      </svg>
+      <h3>Envelopamento Automotivo</h3>
+      <p>Identidade aplicada em frotas e veículos individuais, com recorte de precisão e material de alta durabilidade.</p>
+      <div class="svc-specs">
+        <span>VINIL</span><span>FROTAS</span><span>UV</span>
+      </div>
+    </div>
+
+    <div class="svc-card reg">
+      <span class="rc1"></span><span class="rc2"></span>
+      <span class="svc-num mono">SERV.03</span>
+      <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+        <rect x="14" y="6" width="12" height="10" rx="1"/>
+        <line x1="20" y1="16" x2="20" y2="34"/>
+        <line x1="12" y1="34" x2="28" y2="34"/>
+        <line x1="20" y1="22" x2="14" y2="27"/>
+        <line x1="20" y1="22" x2="26" y2="27"/>
+      </svg>
+      <h3>Totens & Estruturas em Metalon</h3>
+      <p>Cálculo estrutural e fabricação de totens e painéis de grande porte com foco em precisão e resistência.</p>
+      <div class="svc-specs">
+        <span>METALON</span><span>SOLDA</span><span>GRANDE FORMATO</span>
+      </div>
+    </div>
+
+    <div class="svc-card reg">
+      <span class="rc1"></span><span class="rc2"></span>
+      <span class="svc-num mono">SERV.04</span>
+      <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="20" cy="20" r="13"/>
+        <path d="M20 7v26M7 20h26" opacity=".4"/>
+        <path d="M13 13l14 14"/>
+      </svg>
+      <h3>Identidade Visual & Logomarcas</h3>
+      <p>Criação de marcas modernas para clínicas, empresas e espaços corporativos, prontas para o mundo físico.</p>
+      <div class="svc-specs">
+        <span>BRANDING</span><span>NAMING</span><span>MANUAL DE MARCA</span>
+      </div>
+    </div>
+
+    <div class="svc-card reg">
+      <span class="rc1"></span><span class="rc2"></span>
+      <span class="svc-num mono">SERV.05</span>
+      <svg class="svc-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.6">
+        <rect x="11" y="6" width="18" height="28" rx="1"/>
+        <circle cx="24" cy="20" r="1.2" fill="currentColor" stroke="none"/>
+        <line x1="15" y1="12" x2="22" y2="12"/>
+      </svg>
+      <h3>Sinalização Interna & Portas</h3>
+      <p>Placas, wayfinding e portas identificadas para órgãos públicos e ambientes institucionais.</p>
+      <div class="svc-specs">
+        <span>WAYFINDING</span><span>PVC</span><span>BRAILLE</span>
+      </div>
+    </div>
+
+    <div class="svc-card reg" style="display:flex;flex-direction:column;justify-content:center;">
+      <span class="rc1"></span><span class="rc2"></span>
+      <h3 style="margin-bottom:14px;">Não encontrou<br>seu projeto?</h3>
+      <p style="margin-bottom:22px;">Cada estrutura é orçada sob medida. Envie seu desenho ou referência e retornamos com uma proposta técnica.</p>
+      <a class="btn btn--ghost" style="width:fit-content;" href="#contato">Solicitar Análise Técnica</a>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- ============ PORTFÓLIO ============ -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <div class="eyebrow">Últimos Trabalhos</div>
+        <h2>Projetos entregues, medidos e instalados</h2>
+      </div>
+      <p>Uma seleção do que produzimos recentemente — do desenho técnico ao acabamento em campo.</p>
+    </div>
+
+    <!-- EDITAR: cada bloco .folio-item é um projeto do portfólio (nome + medida no hover) -->
+    <div class="folio-grid">
+
+      <!-- EDITAR FOTOS: cada item abaixo usa um arquivo dentro da pasta fotos/. Basta substituir o arquivo pela sua foto, mantendo o mesmo nome. -->
+      <!-- EDITAR FOTOS E TEXTOS: cada item roda automaticamente entre as fotos listadas em data-slides, -->
+      <!-- trocando foto + nome + medida a cada 7 segundos. Para editar, mude o "src" (arquivo em fotos/), -->
+      <!-- o "name" (nome do projeto) e o "spec" (medida/material) de cada slide. Pode ter 1, 2 ou 3 fotos por item. -->
+      <div class="folio-item s-a" data-slides='[
+        {"src":"fotos/portfolio-01-fachada-clinica-a.jpg","name":"Fachada Espaço Clínico","spec":"6000 × 2600mm — ACM + LED"},
+        {"src":"fotos/portfolio-01-fachada-clinica-b.jpg","name":"Fachada Espaço Clínico — Detalhe","spec":"Iluminação embutida em LED"},
+        {"src":"fotos/portfolio-01-fachada-clinica-c.jpg","name":"Fachada Espaço Clínico — Instalação","spec":"Vista noturna acesa"}
+      ]'>
+        <img src="fotos/portfolio-01-fachada-clinica-a.jpg" alt="Fachada Espaço Clínico">
+        <div class="folio-overlay"><div class="p-name">Fachada Espaço Clínico</div><div class="p-spec mono">6000 × 2600mm — ACM + LED</div></div>
+      </div>
+
+      <div class="folio-item s-b" data-slides='[
+        {"src":"fotos/portfolio-02-envelopamento-frota-a.jpg","name":"Envelopamento de Frota","spec":"12 veículos — Vinil UV"},
+        {"src":"fotos/portfolio-02-envelopamento-frota-b.jpg","name":"Envelopamento de Frota — Aplicação","spec":"Recorte de precisão"},
+        {"src":"fotos/portfolio-02-envelopamento-frota-c.jpg","name":"Envelopamento de Frota — Finalizado","spec":"Frota completa entregue"}
+      ]'>
+        <img src="fotos/portfolio-02-envelopamento-frota-a.jpg" alt="Envelopamento de Frota">
+        <div class="folio-overlay"><div class="p-name">Envelopamento de Frota</div><div class="p-spec mono">12 veículos — Vinil UV</div></div>
+      </div>
+
+      <div class="folio-item s-c" data-slides='[
+        {"src":"fotos/portfolio-03-totem-institucional-a.jpg","name":"Totem Institucional","spec":"H 6200mm"},
+        {"src":"fotos/portfolio-03-totem-institucional-b.jpg","name":"Totem Institucional — Base","spec":"Estrutura em metalon"},
+        {"src":"fotos/portfolio-03-totem-institucional-c.jpg","name":"Totem Institucional — Instalado","spec":"Vista noturna com LED"}
+      ]'>
+        <img src="fotos/portfolio-03-totem-institucional-a.jpg" alt="Totem Institucional">
+        <div class="folio-overlay"><div class="p-name">Totem Institucional</div><div class="p-spec mono">H 6200mm</div></div>
+      </div>
+
+      <div class="folio-item s-d" data-slides='[
+        {"src":"fotos/portfolio-04-estrutura-metalon-a.jpg","name":"Estrutura em Metalon","spec":"6 × 2m — Aço carbono"},
+        {"src":"fotos/portfolio-04-estrutura-metalon-b.jpg","name":"Estrutura em Metalon — Solda","spec":"Acabamento em campo"},
+        {"src":"fotos/portfolio-04-estrutura-metalon-c.jpg","name":"Estrutura em Metalon — Pintura","spec":"Acabamento anticorrosivo"}
+      ]'>
+        <img src="fotos/portfolio-04-estrutura-metalon-a.jpg" alt="Estrutura em Metalon">
+        <div class="folio-overlay"><div class="p-name">Estrutura em Metalon</div><div class="p-spec mono">6 × 2m — Aço carbono</div></div>
+      </div>
+
+      <div class="folio-item s-f" data-slides='[
+        {"src":"fotos/portfolio-06-identidade-farmacias-a.jpg","name":"Identidade — Rede de Farmácias","spec":"Naming + manual de marca"},
+        {"src":"fotos/portfolio-06-identidade-farmacias-b.jpg","name":"Identidade — Aplicação em Loja","spec":"Fachada + sinalização interna"},
+        {"src":"fotos/portfolio-06-identidade-farmacias-c.jpg","name":"Identidade — Papelaria e Uniformes","spec":"Aplicação completa da marca"}
+      ]'>
+        <img src="fotos/portfolio-06-identidade-farmacias-a.jpg" alt="Identidade — Rede de Farmácias">
+        <div class="folio-overlay"><div class="p-name">Identidade — Rede de Farmácias</div><div class="p-spec mono">Naming + manual de marca</div></div>
+      </div>
+
+    </div>
+
+    <div class="folio-more">
+      <a href="#contato" class="btn btn--ghost">Ver Portfólio Completo</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ INSTAGRAM ============ -->
+<section id="instagram" class="insta">
+  <div class="wrap">
+    <div class="head-row">
+      <div>
+        <div class="eyebrow">@cadancomunicacaovisual</div>
+        <h2>Acompanhe nosso dia a dia e instalações</h2>
+      </div>
+      <p>Bastidores da fabricação, entregas recentes e making-of direto do canteiro de obras.</p>
+    </div>
+
+    <div class="insta-grid">
+      <!-- EDITAR FOTOS: coloque prints/fotos reais do Instagram na pasta fotos/, mantendo estes nomes -->
+      <div class="insta-item"><img src="fotos/instagram-01.jpg" alt="Post Instagram 1"></div>
+      <div class="insta-item"><img src="fotos/instagram-02.jpg" alt="Post Instagram 2"></div>
+      <div class="insta-item"><img src="fotos/instagram-03.jpg" alt="Post Instagram 3"></div>
+      <div class="insta-item"><img src="fotos/instagram-04.jpg" alt="Post Instagram 4"></div>
+      <div class="insta-item"><img src="fotos/instagram-05.jpg" alt="Post Instagram 5"></div>
+      <div class="insta-item"><img src="fotos/instagram-06.jpg" alt="Post Instagram 6"></div>
+    </div>
+
+    <div class="insta-cta">
+      <!-- EDITAR: troque pelo link real do Instagram da CADAN -->
+      <a class="btn btn--primary" href="https://instagram.com/cadancomunicacaovisual" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        Seguir @CadanComunicacaoVisual
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLIENTES ============ -->
+<section id="clientes" class="clients">
+  <div class="wrap">
+    <div class="eyebrow" style="justify-content:center;">Organizações de Alta Performance que Confiam em Nossos Serviços</div>
+    <h2 class="display" style="text-align:center;font-size:clamp(26px,3vw,36px);font-weight:800;margin-bottom:36px;">Prefeituras, Agências, Clínicas e redes corporativas</h2>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="client-chip"><i></i>Prefeitura Municipal de Santa Cruz do Sul</span>
+      <span class="client-chip"><i></i>Phillip Morris Brasil</span>
+      <span class="client-chip"><i></i>Postos Shopping Car</span>
+      <span class="client-chip"><i></i>Gam</span>
+      <span class="client-chip"><i></i>Esporte Clube Corinthians</span>
+      <span class="client-chip"><i></i>Assemp</span>
+      <span class="client-chip"><i></i>Agência Nakal</span>
+      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Tenda Plus</span>
+      <span class="client-chip"><i></i>Excelsior Alimentos</span>
+      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Condomínio Lisaruth</span>
+      <span class="client-chip"><i></i>imobíliaria Tayumi</span>
+      <!-- duplicate for seamless loop -->
+   <span class="client-chip"><i></i>Prefeitura Municipal de Santa Cruz</span>
+      <span class="client-chip"><i></i>Phillip Morris Brasil</span>
+      <span class="client-chip"><i></i>Postos Shopping Car</span>
+      <span class="client-chip"><i></i>Gam</span>
+      <span class="client-chip"><i></i>Esporte Clube Corinthians</span>
+      <span class="client-chip"><i></i>Asemp</span>
+      <span class="client-chip"><i></i>Agência Nakal</span>
+      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Tenda Plus</span>
+      <span class="client-chip"><i></i>Excelsior Alimentos</span>
+      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Condomínio Lisaruth</span>
+      <span class="client-chip"><i></i>imobíliaria Tayumi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA STRIP ============ -->
+<section id="contato" style="border-top:none;padding:0;">
+  <div class="cta-strip">
+    <div class="eyebrow" style="justify-content:center;">Vamos ao Projeto</div>
+    <h2>Tem um desenho, uma ideia ou uma medida?<br>Transformamos em estrutura.</h2>
+    <p>Envie referências ou plantas e retornamos com um orçamento técnico detalhado em até 24h úteis.</p>
+    <!-- EDITAR: mesmo número de WhatsApp de cima -->
+    <a class="btn btn--primary" href="https://wa.link/sqr8dh" target="_blank" rel="noopener">Solicitar Orçamento via WhatsApp</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="cadan-logo.png" alt="CADAN Comunicação Visual" class="foot-logo-img">
+        <p>Comunicação visual e fabricação estrutural — do projeto técnico à instalação em campo, em todo o Rio Grande do Sul.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Navegação</h4>
+        <a href="#top">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#clientes">Clientes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Serviços</h4>
+        <a href="#servicos">Fachadas em Relevo</a>
+        <a href="#servicos">Envelopamento</a>
+        <a href="#servicos">Totens & Metalon</a>
+        <a href="#servicos">Sinalização</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contato</h4>
+        <!-- EDITAR: endereço, e-mail e telefone reais da CADAN -->
+        <li>tv. Maurício Cardoso, 276 <br>Santa Cruz do Sul / RS</li>
+        <a href="atendimento@cadancomunicacao.com.br">contato@cadan.com.br</a>
+        <a href="https://wa.link/sqr8dh">(51) 3902-7458</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <!-- EDITAR: CNPJ real -->
+      <p>© 2026 CADAN COMUNICAÇÃO VISUAL — CNPJ 00.000.000/0001-00</p>
+      <div class="foot-social">
+        <!-- EDITAR: mesmos links de Instagram e WhatsApp de cima -->
+        <a href="https://instagram.com/cadancomunicacaovisual" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+        </a>
+        <a href="https://wa.link/sqr8dh" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20l1.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOAT ============ -->
+<!-- EDITAR: botão flutuante — mesmo número de WhatsApp -->
+<a class="wpp-float" href="https://wa.link/sqr8dh" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20l1.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg>
+</a>
+
+<script>
+  // simple mobile menu toggle
+  const burger = document.querySelector('.burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += open ? '' : 'position:fixed;top:76px;left:0;right:0;background:#14171B;flex-direction:column;padding:24px;border-bottom:1px solid #31373E;';
+  });
+
+  // Rotação automática das fotos e descrições do Portfólio (troca a cada 7 segundos)
+  // + também troca ao clicar na foto (e reinicia a contagem dos 7 segundos)
+  // Para editar as fotos/textos que giram, mude o atributo data-slides de cada .folio-item no HTML acima.
+  document.querySelectorAll('.folio-item[data-slides]').forEach((item) => {
+    let slides;
+    try { slides = JSON.parse(item.dataset.slides); } catch (e) { return; }
+    if (!slides || slides.length < 2) return; // só um slide: nada a girar
+
+    const img = item.querySelector('img');
+    const nameEl = item.querySelector('.p-name');
+    const specEl = item.querySelector('.p-spec');
+    let index = 0;
+    let timer = null;
+
+    function goToSlide(newIndex) {
+      index = newIndex;
+      const next = slides[index];
+
+      img.style.opacity = 0;
+      nameEl.style.opacity = 0;
+      specEl.style.opacity = 0;
+
+      setTimeout(() => {
+        img.src = next.src;
+        nameEl.textContent = next.name;
+        specEl.textContent = next.spec;
+        img.style.opacity = 1;
+        nameEl.style.opacity = 1;
+        specEl.style.opacity = 1;
+      }, 600);
+    }
+
+    function startAutoRotate() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        goToSlide((index + 1) % slides.length);
+      }, 7000);
+    }
+
+    // clique na foto: avança pro próximo slide e reinicia a contagem de 7s
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', () => {
+      goToSlide((index + 1) % slides.length);
+      startAutoRotate();
+    });
+
+    startAutoRotate();
+  });
+</script>
+
+</body>
+</html>
