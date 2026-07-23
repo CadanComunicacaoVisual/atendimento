@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -279,7 +280,7 @@
     .logo-mark{height:26px;}
     .hero-grid{grid-template-columns:1.15fr .85fr;gap:16px;align-items:start;}
     .hero{padding-top:104px;}
-    .svc-grid{grid-template-columns:repeat(2,1fr);}
+    .svc-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;}
     .folio-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}
     .folio-item.s-a,.folio-item.s-e,.folio-item.s-f{grid-column:span 2;grid-row:span 2;}
     .folio-item.s-c,.folio-item.s-d{grid-column:span 1;grid-row:span 2;}
@@ -296,8 +297,10 @@
     .eyebrow{margin-bottom:9px;font-size:11px;}
     .head-row h2{font-size:clamp(26px,7vw,32px);}
     .head-row p{font-size:14px;max-width:100%;}
-    .svc-grid{grid-template-columns:repeat(2,1fr);}
-    .svc-card{padding:16px 14px 16px;}
+    #servicos .eyebrow,#portfolio .eyebrow,#instagram .eyebrow{justify-content:center;width:100%;}
+    .svc-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;}
+    .svc-card{padding:16px 14px 16px;display:flex;flex-direction:column;}
+    .svc-specs{margin-top:auto;}
     .svc-num{margin-bottom:10px;font-size:10px;}
     .svc-icon{width:24px;height:24px;margin-bottom:9px;}
     .svc-card h3{font-size:14.5px;margin-bottom:6px;line-height:1.05;}
@@ -324,14 +327,13 @@
     .clients{padding:44px 0;}
     .marquee{padding:26px 0;}
     .cta-strip{padding:52px 20px;}
-    .foot-grid{grid-template-columns:1fr 1fr;gap:24px 16px;}
-    .foot-grid>div:first-child{grid-column:span 2;}
-    .foot-grid>div:nth-child(4){grid-column:span 2;}
-    .foot-logo-img{height:42px;}
-    .foot-grid p{font-size:12.5px;max-width:100%;}
-    .foot-col h4{font-size:10.5px;margin-bottom:11px;}
-    .foot-col a,.foot-col li{font-size:12.5px;margin-bottom:8px;}
-    .foot-bottom{flex-direction:column;align-items:flex-start;}
+    .foot-grid{grid-template-columns:repeat(3,1fr);gap:20px 10px;}
+    .foot-grid>div:first-child{grid-column:span 3;text-align:center;}
+    .foot-logo-img{height:40px;display:block;margin:0 auto 14px;}
+    .foot-grid p{font-size:12px;max-width:100%;margin:0 auto;}
+    .foot-col h4{font-size:9px;margin-bottom:9px;letter-spacing:.06em;}
+    .foot-col a,.foot-col li{font-size:10.5px;margin-bottom:7px;line-height:1.35;}
+    .foot-bottom{flex-direction:column;align-items:center;text-align:center;}
     .wpp-float{width:52px;height:52px;bottom:18px;right:18px;}
   }
 </style>
