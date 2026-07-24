@@ -298,8 +298,10 @@
     .head-row p{font-size:14px;max-width:100%;}
     #servicos .eyebrow,#portfolio .eyebrow,#instagram .eyebrow{justify-content:center;width:100%;}
     .svc-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;}
-    .svc-card{padding:16px 14px 16px;display:flex;flex-direction:column;}
-    .svc-specs{margin-top:auto;}
+    .svc-card{padding:16px 14px 16px;display:flex;flex-direction:column;min-width:0;overflow-wrap:break-word;}
+    .svc-card h3,.svc-card p{overflow-wrap:break-word;word-break:break-word;}
+    .svc-specs{min-width:0;margin-top:auto;}
+    .svc-specs span{white-space:normal;}
     .svc-num{margin-bottom:10px;font-size:10px;}
     .svc-icon{width:24px;height:24px;margin-bottom:9px;}
     .svc-card h3{font-size:14.5px;margin-bottom:6px;line-height:1.05;}
@@ -321,7 +323,11 @@
     .hero-art-frame{padding:18px 8px 8px;}
     .hero-art-frame .tag{font-size:7.5px;top:-8px;left:10px;padding:0 5px;}
     .hero-art-frame img{height:160px !important;}
-    .folio-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:130px;}
+    #portfolio{padding:36px 0;}
+    .folio-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;gap:8px;}
+    .folio-item.s-a,.folio-item.s-b,.folio-item.s-e,.folio-item.s-f{grid-column:span 2;grid-row:span 1;}
+    .folio-item.s-c,.folio-item.s-d{grid-column:span 1;grid-row:span 1;}
+    .folio-more{margin-top:18px;}
     .insta-grid{grid-template-columns:repeat(2,1fr);}
     .clients{padding:44px 0;}
     .marquee{padding:26px 0;}
@@ -375,8 +381,9 @@
       </div>
       <!-- Números — visível no desktop. No mobile, a versão reduzida aparece embaixo da imagem (ver hero-stats--mobile) -->
       <div class="hero-stats hero-stats--desktop">
-        <div><b>COMPROMISSO E RESPONSABILIDADE</b>Em Um Só Lugar<span></span></div>
-        <div><b>   </b><span>          </span></div>
+        <div><b>500+</b><span>Projetos entregues</span></div>
+        <div><b>14</b><span>Anos de fabricação</span></div>
+        <div><b>±2mm</b><span>Precisão estrutural</span></div>
       </div>
     </div>
 
@@ -617,8 +624,7 @@
       <span class="client-chip"><i></i>Gam</span>
       <span class="client-chip"><i></i>Esporte Clube Corinthians</span>
       <span class="client-chip"><i></i>Assemp</span>
-      <span class="client-chip"><i></i>Agência Nakal</span>
-      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Agência Nakao</span>
       <span class="client-chip"><i></i>Tenda Plus</span>
       <span class="client-chip"><i></i>Excelsior Alimentos</span>
       <span class="client-chip"><i></i>Grupo Rbs</span>
@@ -630,9 +636,8 @@
       <span class="client-chip"><i></i>Postos Shopping Car</span>
       <span class="client-chip"><i></i>Gam</span>
       <span class="client-chip"><i></i>Esporte Clube Corinthians</span>
-      <span class="client-chip"><i></i>Asemp</span>
-      <span class="client-chip"><i></i>Agência Nakal</span>
-      <span class="client-chip"><i></i>Grupo Rbs</span>
+      <span class="client-chip"><i></i>Assemp</span>
+      <span class="client-chip"><i></i>Agência Nakao</span>
       <span class="client-chip"><i></i>Tenda Plus</span>
       <span class="client-chip"><i></i>Excelsior Alimentos</span>
       <span class="client-chip"><i></i>Grupo Rbs</span>
@@ -678,14 +683,14 @@
       <div class="foot-col">
         <h4>Contato</h4>
         <!-- EDITAR: endereço, e-mail e telefone reais da CADAN -->
-        <li>tv. Maurício Cardoso, 276 <br>Santa Cruz do Sul / RS</li>
+        <li>Tv. Maurício Cardoso, 276 <br>Santa Cruz do Sul / RS</li>
         <a href="atendimento@cadancomunicacao.com.br">contato@cadan.com.br</a>
         <a href="https://wa.link/sqr8dh">(51) 3902-7458</a>
       </div>
     </div>
     <div class="foot-bottom">
       <!-- EDITAR: CNPJ real -->
-      <p>© 2026 CADAN COMUNICAÇÃO VISUAL — CNPJ 00.000.000/0001-00</p>
+      <p>© 2026 CADAN COMUNICAÇÃO VISUAL — CNPJ 27.300.878/0001-07</p>
       <div class="foot-social">
         <!-- EDITAR: mesmos links de Instagram e WhatsApp de cima -->
         <a href="https://instagram.com/cadancomunicacaovisual" target="_blank" rel="noopener" aria-label="Instagram">
