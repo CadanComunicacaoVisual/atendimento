@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sinalização Interna &amp; Portas — CADAN Comunicação Visual</title>
+<meta name="description" content="Trabalhos de Sinalização Interna &amp; Portas da CADAN Comunicação Visual.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="galerias.css">
+</head>
+<body>
+<header class="gallery-header"><div class="wrap nav"><a href="index.html" class="logo">CADAN<span> / </span>Comunicação Visual</a><a class="btn btn--ghost" href="index.html#servicos">Voltar aos serviços</a></div></header>
+<main class="gallery-main grid-bg"><div class="wrap">
+<div class="eyebrow">SERV.05 / Trabalhos realizados</div>
+<h1>Sinalização Interna &amp; Portas</h1>
+<p class="gallery-lede">Conheça nossos trabalhos nesta categoria. Selecione uma foto para visualizar em tamanho maior.</p>
+<nav class="category-nav" aria-label="Categorias de trabalhos"><a href="fachadas.html">Fachadas &amp; Letras em Relevo</a><a href="envelopamento.html">Envelopamento Automotivo</a><a href="totens-metalon.html">Totens &amp; Estruturas em Metalon</a><a href="identidade-visual.html">Identidade Visual &amp; Logomarcas</a><a href="sinalizacao.html" aria-current="page">Sinalização Interna &amp; Portas</a></nav>
+<!-- PARA ADICIONAR UMA FOTO: copie este bloco para dentro de .work-grid.
+Se a página ainda não tem .work-grid, substitua .empty-gallery por <div class="work-grid"> e coloque os blocos dentro dela, fechando com </div>.
+<figure class="work-card">
+  <a class="work-photo" href="fotos/NOME-DA-FOTO.jpg" target="_blank" rel="noopener" aria-label="Ampliar foto do projeto">
+    <img src="fotos/NOME-DA-FOTO.jpg" alt="Descrição do trabalho realizado" loading="lazy" width="800" height="600">
+  </a>
+  <figcaption><h2>Nome do projeto</h2><p>Material e acabamento</p></figcaption>
+</figure>
+-->
+<div class="empty-gallery"><h2>Novos trabalhos em breve</h2><p>Entre em contato para conhecer os projetos desta categoria.</p></div>
+<a href="https://wa.link/sqr8dh" target="_blank" rel="noopener" class="btn btn--primary">Solicitar orçamento</a>
+</div></main>
+<footer><div class="wrap"><p>© 2026 CADAN Comunicação Visual</p></div></footer>
+<script>
+// Mostra uma mensagem discreta quando a foto ainda não foi enviada ao site.
+document.querySelectorAll('.work-photo img').forEach(img => {
+  const missing = () => {
+    const link = img.parentElement;
+    const label = document.createElement('span');
+    label.textContent = 'Foto indisponível no momento';
+    link.replaceChildren(label);
+    link.removeAttribute('href');
+    link.removeAttribute('aria-label');
+  };
+  img.addEventListener('error', missing, {once: true});
+  if (img.complete && img.naturalWidth === 0) missing();
+});
+</script>
+</body></html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Totens &amp; Estruturas em Metalon — CADAN Comunicação Visual</title>
+<meta name="description" content="Trabalhos de Totens &amp; Estruturas em Metalon da CADAN Comunicação Visual.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="galerias.css">
+</head>
+<body>
+<header class="gallery-header"><div class="wrap nav"><a href="index.html" class="logo">CADAN<span> / </span>Comunicação Visual</a><a class="btn btn--ghost" href="index.html#servicos">Voltar aos serviços</a></div></header>
+<main class="gallery-main grid-bg"><div class="wrap">
+<div class="eyebrow">SERV.03 / Trabalhos realizados</div>
+<h1>Totens &amp; Estruturas em Metalon</h1>
+<p class="gallery-lede">Conheça nossos trabalhos nesta categoria. Selecione uma foto para visualizar em tamanho maior.</p>
+<nav class="category-nav" aria-label="Categorias de trabalhos"><a href="fachadas.html">Fachadas &amp; Letras em Relevo</a><a href="envelopamento.html">Envelopamento Automotivo</a><a href="totens-metalon.html" aria-current="page">Totens &amp; Estruturas em Metalon</a><a href="identidade-visual.html">Identidade Visual &amp; Logomarcas</a><a href="sinalizacao.html">Sinalização Interna &amp; Portas</a></nav>
+<!-- PARA ADICIONAR UMA FOTO: copie este bloco para dentro de .work-grid.
+Se a página ainda não tem .work-grid, substitua .empty-gallery por <div class="work-grid"> e coloque os blocos dentro dela, fechando com </div>.
+<figure class="work-card">
+  <a class="work-photo" href="fotos/NOME-DA-FOTO.jpg" target="_blank" rel="noopener" aria-label="Ampliar foto do projeto">
+    <img src="fotos/NOME-DA-FOTO.jpg" alt="Descrição do trabalho realizado" loading="lazy" width="800" height="600">
+  </a>
+  <figcaption><h2>Nome do projeto</h2><p>Material e acabamento</p></figcaption>
+</figure>
+-->
+<div class="work-grid"><figure class="work-card">
+  <a class="work-photo" href="fotos/portfolio-04-estrutura-metalon-a.jpg" target="_blank" rel="noopener" aria-label="Ampliar foto: Estrutura em Metalon">
+    <img src="fotos/portfolio-04-estrutura-metalon-a.jpg" alt="Estrutura em Metalon" loading="lazy" width="800" height="600">
+  </a>
+  <figcaption><h2>Estrutura em Metalon</h2><p>6 × 2m — Aço carbono</p></figcaption>
+</figure>
+<figure class="work-card">
+  <a class="work-photo" href="fotos/portfolio-04-estrutura-metalon-b.jpg" target="_blank" rel="noopener" aria-label="Ampliar foto: Estrutura em Metalon — Lona com Ilhos Aplicada">
+    <img src="fotos/portfolio-04-estrutura-metalon-b.jpg" alt="Estrutura em Metalon — Lona com Ilhos Aplicada" loading="lazy" width="800" height="600">
+  </a>
+  <figcaption><h2>Estrutura em Metalon — Lona com Ilhos Aplicada</h2><p>Sua Marca em Destaque!</p></figcaption>
+</figure>
+<figure class="work-card">
+  <a class="work-photo" href="fotos/portfolio-04-estrutura-metalon-c.jpg" target="_blank" rel="noopener" aria-label="Ampliar foto: Estrutura em Metalon — Pintura">
+    <img src="fotos/portfolio-04-estrutura-metalon-c.jpg" alt="Estrutura em Metalon — Pintura" loading="lazy" width="800" height="600">
+  </a>
+  <figcaption><h2>Estrutura em Metalon — Pintura</h2><p>Acabamento anticorrosivo</p></figcaption>
+</figure>
+</div>
+<a href="https://wa.link/sqr8dh" target="_blank" rel="noopener" class="btn btn--primary">Solicitar orçamento</a>
+</div></main>
+<footer><div class="wrap"><p>© 2026 CADAN Comunicação Visual</p></div></footer>
+<script>
+// Mostra uma mensagem discreta quando a foto ainda não foi enviada ao site.
+document.querySelectorAll('.work-photo img').forEach(img => {
+  const missing = () => {
+    const link = img.parentElement;
+    const label = document.createElement('span');
+    label.textContent = 'Foto indisponível no momento';
+    link.replaceChildren(label);
+    link.removeAttribute('href');
+    link.removeAttribute('aria-label');
+  };
+  img.addEventListener('error', missing, {once: true});
+  if (img.complete && img.naturalWidth === 0) missing();
+});
+</script>
+</body></html>
