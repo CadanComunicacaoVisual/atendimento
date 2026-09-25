@@ -1,0 +1,28 @@
+/* Carregamento CADAN: animação vetorial leve, sem depender de um GIF. */
+.page-loader{position:fixed;inset:0;z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;background:#14171B;color:#F3F4EF;cursor:progress;}
+.page-loader[hidden]{display:none!important;}
+.page-loader svg,.page-loader img{display:block;width:72px;height:72px;object-fit:contain;}
+.page-loader svg{color:#CF2B1D;animation:cadan-loader-turn 1.8s ease-in-out infinite;}
+.page-loader p{font:500 12px/1.5 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;}
+@keyframes cadan-loader-turn{from{transform:rotate(0deg)}to{transform:rotate(180deg)}}
+@media(prefers-reduced-motion:reduce){.page-loader svg{animation:none;}.page-loader img{display:none;}}
+
+.page-loader img {
+  width: 620px;
+  height: 620px;
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+}
+.page-loader {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.page-loader.page-loader--saindo {
+  opacity: 0;
+  pointer-events: none;
+}
+.page-loader[hidden] {
+  display: none !important;
+}
