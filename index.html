@@ -406,6 +406,11 @@
       width:100%;object-fit:cover;object-position:center;
     }
   }
+  /* Oculta somente o projeto em destaque no celular. */
+  @media (max-width:600px){
+    #top .hero-art-frame{display:none;}
+    #top .hero-grid{grid-template-columns:minmax(0,1fr);}
+  }
 </style>
 <link rel="stylesheet" href="carregamento.css">
 <script src="carregamento.js" defer></script>
